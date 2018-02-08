@@ -501,9 +501,10 @@ void EventRegistry::collect()
       sizeof(Event::StateChanges::value_type) * ev.second.stateChanges.size();
     packSendBuf.emplace_back(packSize);
     int position = 0;
-    MPI_Pack(ev.second.getData().data(), ev.second.getData().size(),
+    MPI_Pack(const_cast<int*>(ev.second.getData().data()),
+             ev.second.getData().size(),
              MPI_INT, packSendBuf.back().data(), packSize, &position, MPI_COMM_WORLD);
-    MPI_Pack(ev.second.stateChanges.data(),
+    MPI_Pack(const_cast<Event::StateChanges::pointer>(ev.second.stateChanges.data()),
              ev.second.stateChanges.size() * sizeof(Event::StateChanges::value_type),
              MPI_BYTE, packSendBuf.back().data(), packSize, &position, MPI_COMM_WORLD);
 

@@ -2,6 +2,9 @@ language: cpp
 dist: trusty
 sudo: false
 
+services:
+  - docker
+
 compiler:
   - gcc
   - clang
@@ -12,11 +15,7 @@ addons:
       - libopenmpi-dev
       - openmpi-bin
       - cmake
-      
-before_script:
-  - mkdir $TRAVIS_BUILD_DIR/BUILD
 
 script:
-  - cd $TRAVIS_BUILD_DIR/BUILD
-  - cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=$CXX
-  - make
+  - docker build -t eventtimings .
+    

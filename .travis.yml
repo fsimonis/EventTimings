@@ -19,4 +19,4 @@ before_script:
 script:
   - cd $TRAVIS_BUILD_DIR/BUILD
   - cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=$CXX
-    
+  - make

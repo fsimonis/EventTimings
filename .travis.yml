@@ -17,5 +17,5 @@ addons:
       - cmake
 
 script:
-  - docker build -t eventtimings .
+  - docker build -t eventtimings --build-arg CXX=$CXX .
     
